@@ -18,7 +18,7 @@ func TestGetPrice(t *testing.T) {
 		{2 * HOUR_MINUTES, 2 * HOURLY_TARIFF, nil},
 		{30, 30 * MINUTE_TARIFF, nil},
 		{1, MINUTE_TARIFF, nil},
-		{-1, 0, errors.New("")},
+		{-1, 0, errors.New("minutes amount was negative")},
 	}
 	for _, testCase := range testCases {
 		testCaseName := fmt.Sprintf("Minutes:%v,Price:%v", testCase.minutes, testCase.expected)
