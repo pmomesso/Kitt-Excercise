@@ -12,7 +12,7 @@ func isWeeks(minutes int) bool {
 	return minutes%WEEK_MINUTES == 0
 }
 
-func amountOfWeeks(minutes int) int {
+func amountOfWeeksCeil(minutes int) int {
 	amountQuotient := float64(minutes) / WEEK_MINUTES
 	amountCeil := int(math.Ceil(amountQuotient))
 
@@ -25,7 +25,7 @@ func GetPrice(minutes int) int {
 	}
 
 	if isWeeks(minutes) || minutes > DAY_MINUTES {
-		return amountOfWeeks(minutes) * WEEKLY_FARE
+		return amountOfWeeksCeil(minutes) * WEEKLY_FARE
 	}
 
 	return DAILY_FARE
