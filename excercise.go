@@ -22,37 +22,45 @@ func isDays(minutes int) bool {
 	return isExactlyPeriod(minutes, DAY_MINUTES)
 }
 
-func amountOfPeriodCeil(minutes int, periodLength int) int {
+func amountOfPeriodRoundedUp(minutes int, periodLength int) int {
 	amountQuotient := float64(minutes) / float64(periodLength)
 	amountCeil := int(math.Ceil(amountQuotient))
 
 	return amountCeil
 }
 
-func amountOfWeeksCeil(minutes int) int {
-	return amountOfPeriodCeil(minutes, WEEK_MINUTES)
+func amountOfWeeksRoundedUp(minutes int) int {
+	return amountOfPeriodRoundedUp(minutes, WEEK_MINUTES)
 }
 
-func amountOfHoursCeil(minutes int) int {
-	return amountOfPeriodCeil(minutes, HOUR_MINUTES)
+func amountOfHoursRoundedUp(minutes int) int {
+	return amountOfPeriodRoundedUp(minutes, HOUR_MINUTES)
 }
 
 func greaterThanDay(minutes int) bool {
 	return minutes > DAY_MINUTES
 }
 
-func preciselyDay(minutes int) bool {
+func preciselyOneDay(minutes int) bool {
 	return minutes == DAY_MINUTES
+}
+
+func greaterThanMinute(minutes int) bool {
+	return minutes > 1
 }
 
 func GetPrice(minutes int) int {
 	if greaterThanDay(minutes) {
-		return amountOfWeeksCeil(minutes) * WEEKLY_FARE
+		return amountOfWeeksRoundedUp(minutes) * WEEKLY_FARE
 	}
 
-	if preciselyDay(minutes) {
+	if preciselyOneDay(minutes) {
 		return 1 * DAILY_FARE
 	}
 
-	return amountOfHoursCeil(minutes) * HOURLY_FARE
+	if greaterThanMinute(minutes) {
+		return amountOfHoursRoundedUp(minutes) * HOURLY_FARE
+	}
+
+	return minutes * 2
 }
