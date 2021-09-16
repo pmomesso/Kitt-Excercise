@@ -10,12 +10,12 @@ func TestGetPrice(t *testing.T) {
 		minutes, expected int
 	}{
 		{0, 0},
-		{DAY_MINUTES, DAILY_FARE},
-		{2 * WEEK_MINUTES, 2 * WEEKLY_FARE},
-		{2 * DAY_MINUTES, WEEKLY_FARE},
-		{2 * HOUR_MINUTES, 2 * HOURLY_FARE},
-		{30, HOURLY_FARE},
-		{1, 2},
+		{DAY_MINUTES, DAILY_TARIFF},
+		{2 * WEEK_MINUTES, 2 * WEEKLY_TARIFF},
+		{2 * DAY_MINUTES, WEEKLY_TARIFF},
+		{2 * HOUR_MINUTES, 2 * HOURLY_TARIFF},
+		{30, 30 * MINUTE_TARIFF},
+		{1, MINUTE_TARIFF},
 	}
 	for _, testCase := range testCases {
 		testCaseName := fmt.Sprintf("Minutes:%v,Price:%v", testCase.minutes, testCase.expected)

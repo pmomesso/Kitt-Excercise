@@ -2,25 +2,14 @@ package kittexcercise
 
 import "math"
 
-const HOURLY_FARE = 22
-const DAILY_FARE = 60
-const WEEKLY_FARE = 105
+const MINUTE_TARIFF = 2
+const HOURLY_TARIFF = 22
+const DAILY_TARIFF = 60
+const WEEKLY_TARIFF = 105
 
 const HOUR_MINUTES = 60
 const DAY_MINUTES = 24 * 60
 const WEEK_MINUTES = 24 * 60 * 7
-
-func isExactlyPeriod(minutes int, periodLength int) bool {
-	return minutes%periodLength == 0
-}
-
-func isWeeks(minutes int) bool {
-	return isExactlyPeriod(minutes, WEEK_MINUTES)
-}
-
-func isDays(minutes int) bool {
-	return isExactlyPeriod(minutes, DAY_MINUTES)
-}
 
 func amountOfPeriodRoundedUp(minutes int, periodLength int) int {
 	amountQuotient := float64(minutes) / float64(periodLength)
@@ -41,26 +30,26 @@ func greaterThanDay(minutes int) bool {
 	return minutes > DAY_MINUTES
 }
 
+func greaterThanOneHour(minutes int) bool {
+	return minutes > HOUR_MINUTES
+}
+
 func preciselyOneDay(minutes int) bool {
 	return minutes == DAY_MINUTES
 }
 
-func greaterThanMinute(minutes int) bool {
-	return minutes > 1
-}
-
 func GetPrice(minutes int) int {
 	if greaterThanDay(minutes) {
-		return amountOfWeeksRoundedUp(minutes) * WEEKLY_FARE
+		return amountOfWeeksRoundedUp(minutes) * WEEKLY_TARIFF
 	}
 
 	if preciselyOneDay(minutes) {
-		return 1 * DAILY_FARE
+		return 1 * DAILY_TARIFF
 	}
 
-	if greaterThanMinute(minutes) {
-		return amountOfHoursRoundedUp(minutes) * HOURLY_FARE
+	if greaterThanOneHour(minutes) {
+		return amountOfHoursRoundedUp(minutes) * HOURLY_TARIFF
 	}
 
-	return minutes * 2
+	return minutes * MINUTE_TARIFF
 }
