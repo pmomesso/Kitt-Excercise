@@ -32,5 +32,9 @@ func GetPrice(minutes int) int {
 		return amountOfWeeksCeil(minutes) * WEEKLY_FARE
 	}
 
-	return DAILY_FARE
+	if minutes%DAY_MINUTES == 0 {
+		return DAILY_FARE
+	}
+
+	return int(math.Ceil(float64(minutes)/60)) * 22
 }
