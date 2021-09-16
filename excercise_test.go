@@ -8,7 +8,9 @@ import (
 func TestGetPrice(t *testing.T) {
 	var testCases = []struct {
 		minutes, expected int
-	}{}
+	}{
+		{0, 0},
+	}
 	for _, testCase := range testCases {
 		testCaseName := fmt.Sprintf("Minutes:%v,Price:%v", testCase.minutes, testCase.expected)
 		t.Run(testCaseName, func(t *testing.T) {
