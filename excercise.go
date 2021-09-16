@@ -10,8 +10,16 @@ const HOUR_MINUTES = 60
 const DAY_MINUTES = 24 * 60
 const WEEK_MINUTES = 24 * 60 * 7
 
+func isExactlyPeriod(minutes int, periodLength int) bool {
+	return minutes%periodLength == 0
+}
+
 func isWeeks(minutes int) bool {
-	return minutes%WEEK_MINUTES == 0
+	return isExactlyPeriod(minutes, WEEK_MINUTES)
+}
+
+func isDays(minutes int) bool {
+	return isExactlyPeriod(minutes, DAY_MINUTES)
 }
 
 func amountOfWeeksCeil(minutes int) int {
@@ -23,10 +31,6 @@ func amountOfWeeksCeil(minutes int) int {
 
 func greaterThanDay(minutes int) bool {
 	return minutes > DAY_MINUTES
-}
-
-func isDays(minutes int) bool {
-	return minutes%DAY_MINUTES == 0
 }
 
 func amountOfDaysCeil(minutes int) int {
