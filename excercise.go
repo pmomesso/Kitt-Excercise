@@ -33,12 +33,16 @@ func greaterThanDay(minutes int) bool {
 	return minutes > DAY_MINUTES
 }
 
+func preciselyOneDay(minutes int) bool {
+	return minutes == DAY_MINUTES
+}
+
 func greaterThanOneHour(minutes int) bool {
 	return minutes > HOUR_MINUTES
 }
 
-func preciselyOneDay(minutes int) bool {
-	return minutes == DAY_MINUTES
+func preciselyOneHour(minutes int) bool {
+	return minutes == HOUR_MINUTES
 }
 
 func invalidMinutesAmount(minutes int) bool {
@@ -60,6 +64,10 @@ func GetPrice(minutes int) (int, error) {
 
 	if greaterThanOneHour(minutes) {
 		return amountOfHoursRoundedUp(minutes) * HOURLY_TARIFF, nil
+	}
+
+	if preciselyOneHour(minutes) {
+		return 1 * HOURLY_TARIFF, nil
 	}
 
 	return minutes * MINUTE_TARIFF, nil
