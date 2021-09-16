@@ -2,9 +2,11 @@ package kittexcercise
 
 import "math"
 
+const HOURLY_FARE = 22
 const DAILY_FARE = 60
 const WEEKLY_FARE = 105
 
+const HOUR_MINUTES = 60
 const DAY_MINUTES = 24 * 60
 const WEEK_MINUTES = 24 * 60 * 7
 
@@ -23,6 +25,17 @@ func greaterThanDay(minutes int) bool {
 	return minutes > DAY_MINUTES
 }
 
+func isDays(minutes int) bool {
+	return minutes%DAY_MINUTES == 0
+}
+
+func amountOfDaysCeil(minutes int) int {
+	amountQuotient := float64(minutes) / HOUR_MINUTES
+	amount := int(math.Ceil(amountQuotient))
+
+	return amount
+}
+
 func GetPrice(minutes int) int {
 	if minutes == 0 {
 		return 0
@@ -32,9 +45,9 @@ func GetPrice(minutes int) int {
 		return amountOfWeeksCeil(minutes) * WEEKLY_FARE
 	}
 
-	if minutes%DAY_MINUTES == 0 {
+	if isDays(minutes) {
 		return DAILY_FARE
 	}
 
-	return int(math.Ceil(float64(minutes)/60)) * 22
+	return amountOfDaysCeil(minutes) * HOURLY_FARE
 }
