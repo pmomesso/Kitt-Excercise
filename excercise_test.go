@@ -1,4 +1,4 @@
-package kittexcercise
+package main
 
 import (
 	"errors"
