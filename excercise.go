@@ -11,7 +11,11 @@ func isWeeks(minutes int) bool {
 }
 
 func amountOfWeeks(minutes int) int {
-	return minutes / WEEK_MINUTES
+	amount := minutes / WEEK_MINUTES
+	if amount == 0 {
+		return 1
+	}
+	return amount
 }
 
 func GetPrice(minutes int) int {
@@ -19,7 +23,7 @@ func GetPrice(minutes int) int {
 		return 0
 	}
 
-	if isWeeks(minutes) {
+	if isWeeks(minutes) || minutes > DAY_MINUTES {
 		return amountOfWeeks(minutes) * WEEKLY_FARE
 	}
 
