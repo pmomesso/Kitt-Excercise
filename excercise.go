@@ -41,17 +41,17 @@ func greaterThanDay(minutes int) bool {
 	return minutes > DAY_MINUTES
 }
 
-func GetPrice(minutes int) int {
-	if minutes == 0 {
-		return 0
-	}
+func preciselyDay(minutes int) bool {
+	return minutes == DAY_MINUTES
+}
 
-	if isWeeks(minutes) || greaterThanDay(minutes) {
+func GetPrice(minutes int) int {
+	if greaterThanDay(minutes) {
 		return amountOfWeeksCeil(minutes) * WEEKLY_FARE
 	}
 
-	if isDays(minutes) {
-		return DAILY_FARE
+	if preciselyDay(minutes) {
+		return 1 * DAILY_FARE
 	}
 
 	return amountOfHoursCeil(minutes) * HOURLY_FARE
