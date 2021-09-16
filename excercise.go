@@ -7,5 +7,9 @@ func GetPrice(minutes int) int {
 		return 0
 	}
 
+	if minutes%(24*60*7) == 0 {
+		return minutes / (24 * 60 * 7) * 105
+	}
+
 	return HOURLY_FARE
 }
