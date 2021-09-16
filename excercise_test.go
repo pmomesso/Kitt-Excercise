@@ -16,7 +16,7 @@ func TestGetPrice(t *testing.T) {
 		{2 * WEEK_MINUTES, 2 * WEEKLY_TARIFF, nil},
 		{2 * DAY_MINUTES, WEEKLY_TARIFF, nil},
 		{2 * HOUR_MINUTES, 2 * HOURLY_TARIFF, nil},
-		{30, 30 * MINUTE_TARIFF, nil},
+		{30, HOURLY_TARIFF, nil},
 		{1, MINUTE_TARIFF, nil},
 		{HOUR_MINUTES, HOURLY_TARIFF, nil},
 		{-1, 0, errors.New("minutes amount was negative")},
