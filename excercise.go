@@ -62,12 +62,8 @@ func GetPrice(minutes int) (int, error) {
 		return 1 * DAILY_TARIFF, nil
 	}
 
-	if greaterThanOneHour(minutes) {
+	if preciselyOneHour(minutes) || greaterThanOneHour(minutes) {
 		return amountOfHoursRoundedUp(minutes) * HOURLY_TARIFF, nil
-	}
-
-	if preciselyOneHour(minutes) {
-		return 1 * HOURLY_TARIFF, nil
 	}
 
 	return minutes * MINUTE_TARIFF, nil
