@@ -1,5 +1,7 @@
 package kittexcercise
 
+import "math"
+
 const DAILY_FARE = 60
 const WEEKLY_FARE = 105
 
@@ -11,11 +13,10 @@ func isWeeks(minutes int) bool {
 }
 
 func amountOfWeeks(minutes int) int {
-	amount := minutes / WEEK_MINUTES
-	if amount == 0 {
-		return 1
-	}
-	return amount
+	amountQuotient := float64(minutes) / WEEK_MINUTES
+	amountCeil := int(math.Ceil(amountQuotient))
+
+	return amountCeil
 }
 
 func GetPrice(minutes int) int {
