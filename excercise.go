@@ -1,6 +1,9 @@
 package kittexcercise
 
-import "math"
+import (
+	"errors"
+	"math"
+)
 
 const MINUTE_TARIFF = 2
 const HOURLY_TARIFF = 22
@@ -38,18 +41,26 @@ func preciselyOneDay(minutes int) bool {
 	return minutes == DAY_MINUTES
 }
 
-func GetPrice(minutes int) int {
+func invalidMinutesAmount(minutes int) bool {
+	return minutes < 0
+}
+
+func GetPrice(minutes int) (int, error) {
+	if invalidMinutesAmount(minutes) {
+		return -1, errors.New("minutes amount was negative")
+	}
+
 	if greaterThanDay(minutes) {
-		return amountOfWeeksRoundedUp(minutes) * WEEKLY_TARIFF
+		return amountOfWeeksRoundedUp(minutes) * WEEKLY_TARIFF, nil
 	}
 
 	if preciselyOneDay(minutes) {
-		return 1 * DAILY_TARIFF
+		return 1 * DAILY_TARIFF, nil
 	}
 
 	if greaterThanOneHour(minutes) {
-		return amountOfHoursRoundedUp(minutes) * HOURLY_TARIFF
+		return amountOfHoursRoundedUp(minutes) * HOURLY_TARIFF, nil
 	}
 
-	return minutes * MINUTE_TARIFF
+	return minutes * MINUTE_TARIFF, nil
 }
