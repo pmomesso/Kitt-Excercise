@@ -19,12 +19,16 @@ func amountOfWeeksCeil(minutes int) int {
 	return amountCeil
 }
 
+func greaterThanDay(minutes int) bool {
+	return minutes > DAY_MINUTES
+}
+
 func GetPrice(minutes int) int {
 	if minutes == 0 {
 		return 0
 	}
 
-	if isWeeks(minutes) || minutes > DAY_MINUTES {
+	if isWeeks(minutes) || greaterThanDay(minutes) {
 		return amountOfWeeksCeil(minutes) * WEEKLY_FARE
 	}
 
